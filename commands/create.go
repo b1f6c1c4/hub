@@ -35,11 +35,11 @@ var cmdCreate = &Command{
 ## Examples:
 		$ hub create
 		[ repo created on GitHub ]
-		> git remote add -f origin git@github.com:USER/REPO.git
+		> git remote add -f origin https://github.com/USER/REPO.git
 
 		$ hub create sinatra/recipes
 		[ repo created in GitHub organization ]
-		> git remote add -f origin git@github.com:sinatra/recipes.git
+		> git remote add -f origin https://github.com/sinatra/recipes.git
 
 ## See also:
 
@@ -115,7 +115,7 @@ func create(command *Command, args *Args) {
 
 	remote, _ := localRepo.OriginRemote()
 	if remote == nil || remote.Name != "origin" {
-		url := project.GitURL("", "", true)
+		url := project.WebURL("", "", "")
 		args.Replace("git", "remote", "add", "-f", "origin", url)
 	} else {
 		args.Replace("git", "remote", "-v")
